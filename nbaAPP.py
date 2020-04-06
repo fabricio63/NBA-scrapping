@@ -1,7 +1,7 @@
 from __future__ import print_function
 import yaml
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, render_template, request
 import os, optparse
 
 app = Flask(__name__)
