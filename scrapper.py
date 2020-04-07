@@ -6,7 +6,8 @@ import pandas as pd
 year = 2020
 
 # URL page we will scraping 
-url = "https://www.basketball-reference.com/leagues/NBA_{}_standings.html".format(year)# this is the HTML from the given URL
+url = "https://www.basketball-reference.com/leagues/NBA_{}_standings.html".format(year)
+# this is the HTML from the given URL
 html = urlopen(url)
 soup = BeautifulSoup(html, features="lxml")
 
@@ -20,12 +21,17 @@ for tablerows in easternTable:
 
 print(headers)
 
-# # avoid the first header row
-# for 
-# rows = soup.findAll('tr')[1:]
-# print(rows)
-# # teamStats = [[td.getText() for td in rows[i].findAll('td')]
-# #             for i in range(len(rows))]
+# scraps eastern conference team names
+teams = []
+for tbody in easternTable:
+    tableBody = tablerows.find_all('tbody')
+    for item in tableBody:
+        href = item.find_all("a", href= True)
+        for name in href:
+            teams.append(name.text)
+
+print(teams)
+        
 
 
 
