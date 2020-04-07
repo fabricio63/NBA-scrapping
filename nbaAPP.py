@@ -14,6 +14,10 @@ def home():
     foo = "bar"
     return render_template("home.html", mivariable = foo, developer = developer)
 
+@app.route("/dataSearch")
+def dataSearch():
+    return render_template("dataSearch.html")
+
 if __name__ == "__main__":
 
     debug = False
