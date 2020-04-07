@@ -2,29 +2,23 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
 
-# NBA Season:
+# NBA season
 year = 2020
 
-# URL of page that will be scraped
-url = "https://www.espn.com/nba/stats/team/_/season/{}/seasontype/2".format(year)
-
-# HTML from the URL
+# URL page we will scraping 
+url = "https://www.basketball-reference.com/leagues/NBA_{}_standings.html".format(year)# this is the HTML from the given URL
 html = urlopen(url)
-
-soup = BeautifulSoup(html, features="lxml" )
-
-# use findALL() to get the column headers
-tr = soup.find_all('tr', attrs={"class":"Table__TR Table__even"} )
-print(tr)
+soup = BeautifulSoup(html, features="lxml")
 
 
-teams = []
-divTeam =  soup.find_all("div", attrs={"class":"flex items-start mr7"} )
-for div in divTeam:
-    hrefTeam = div.find_all("a", href = True)
-    for href in hrefTeam:
-        if href.text != "":
-            teams.append(href.text)
+easternTable = soup.findAll('table', attrs={"id":"confs_standings_E"})
+headers = []
 
+for tablerows in easternTable:
+    tr = tablerows.find_all('tr', limit=1)
+    for text in tr:
+        headers = text.getText().strip().split("\n")
+        
 
+print(headers)
 
