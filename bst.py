@@ -1,178 +1,117 @@
-class Node(object):
 
-	def __init__(self, d):
-		self.data = d
-		self.left = None
-		self.right = None
+# from memory_profiler import profile
 
-	def insert(self, d):
-		if self.data == d:
-			return False
-		elif d < self.data:
-			if self.left:
-				return self.left.insert(d)
-			else:
-				self.left = Node(d)
-				return True
-		else:
-			if self.right:
-				return self.right.insert(d)
-			else:
-				self.right = Node(d)
-				return True
+import gc 
 
-	def find(self, d):
-		if self.data == d:
-			return True
-		elif d < self.data and self.left:
-			return self.left.find(d)
-		elif d > self.data and self.right:
-			return self.right.find(d)
-		return False
+class Node:
 
-	def preorder(self, l):
-		l.append(self.data)
-		if self.left:
-			self.left.preorder(l)
-		if self.right:
-			self.right.preorder(l)
-		return l
+    def __init__(self, t, d):
+        self.team = t
+        self.data = d
+        self.left_child = None
+        self.right_child = None
+    
+    def insert(self, t, d):
+        if self.data == d:
+            return False
+        elif self.data > d:
+            if self.left_child:
+                return self.left_child.insert(t, d)
+            else: 
+                self.left_child = Node(t, d)
+                return True
+        else:
+            if self.right_child:
+                return self.right_child.insert(t, d)
+            else: 
+                self.right_child = Node(t,d)
+                return True
 
-	def postorder(self, l):
-		if self.left:
-			self.left.postorder(l)
-		if self.right:
-			self.right.postorder(l)
-		l.append(self.data)
-		return l
-
-	def inorder(self, l):
-		if self.left:
-			self.left.inorder(l)
-		l.append(self.data)
-		if self.right:
-			self.right.inorder(l)
-		return l
-		
-class BST(object):
-
-	def __init__(self):
-		self.root = None
-
-	# return True if successfully inserted, false if exists
-	def insert(self, d):
-		if self.root:
-			return self.root.insert(d)
-		else:
-			self.root = Node(d)
-			return True
+    def find(self, d):
+        if self.data == d:
+            return True
+        elif self.data > d:
+            if self.left_child:
+                return self.left_child.find(d)
+            else: 
+                return False
+        else: 
+            if self.right_child:
+                return self.right_child.find(d)
+            else: 
+                return False
             
-	# return True if d is found in tree, false otherwise
-	def find(self, d):
-		if self.root:
-			return self.root.find(d)
-		else:
-			return False
-	# return True if node successfully removed, False if not removed
-	def remove(self, d):
-		# Case 1: Empty Tree?
-		if self.root == None:
-			return False
-		
-		# Case 2: Deleting root node
-		if self.root.data == d:
-			# Case 2.1: Root node has no children
-			if self.root.left is None and self.root.right is None:
-				self.root = None
-				return True
-			# Case 2.2: Root node has left child
-			elif self.root.left and self.root.right is None:
-				self.root = self.root.left
-				return True
-			# Case 2.3: Root node has right child
-			elif self.root.left is None and self.root.right:
-				self.root = self.root.right
-				return True
-			# Case 2.4: Root node has two children
-			else:
-				moveNode = self.root.right
-				moveNodeParent = None
-				while moveNode.left:
-					moveNodeParent = moveNode
-					moveNode = moveNode.left
-				self.root.data = moveNode.data
-				if moveNode.data < moveNodeParent.data:
-					moveNodeParent.left = None
-				else:
-					moveNodeParent.right = None
-				return True		
-		# Find node to remove
-		parent = None
-		node = self.root
-		while node and node.data != d:
-			parent = node
-			if d < node.data:
-				node = node.left
-			elif d > node.data:
-				node = node.right
-		# Case 3: Node not found
-		if node == None or node.data != d:
-			return False
-		# Case 4: Node has no children
-		elif node.left is None and node.right is None:
-			if d < parent.data:
-				parent.left = None
-			else:
-				parent.right = None
-			return True
-		# Case 5: Node has left child only
-		elif node.left and node.right is None:
-			if d < parent.data:
-				parent.left = node.left
-			else:
-				parent.right = node.left
-			return True
-		# Case 6: Node has right child only
-		elif node.left is None and node.right:
-			if d < parent.data:
-				parent.left = node.right
-			else:
-				parent.right = node.right
-			return True
-		# Case 7: Node has left and right child
-		else:
-			moveNodeParent = node
-			moveNode = node.right
-			while moveNode.left:
-				moveNodeParent = moveNode
-				moveNode = moveNode.left
-			node.data = moveNode.data
-			if moveNode.right:
-				if moveNode.data < moveNodeParent.data:
-					moveNodeParent.left = moveNode.right
-				else:
-					moveNodeParent.right = moveNode.right
-			else:
-				if moveNode.data < moveNodeParent.data:
-					moveNodeParent.left = None
-				else:
-					moveNodeParent.right = None
-			return True
-	# return list of data elements resulting from preorder tree traversal
-	def preorder(self):
-		if self.root:
-			return self.root.preorder([])
-		else:
-			return []
-	# return list of postorder elements
-	def postorder(self):
-		if self.root:
-			return self.root.postorder([])
-		else:
-			return []
-	# return list of inorder elements
-	def inorder(self):
-		if self.root:
-			return self.root.inorder([])
-		else:
-			return []
+    def traverse(self):
+        print(self.team, self.data)
+        if self.left_child:
+            self.left_child.traverse()
+        if self.right_child:
+            self.right_child.traverse()
+
+    def find_min(self):
+        if self.left_child:
+            return self.left_child.find_min()
+        else:
+            return self.team, self.data
+    
+    def find_max(self):
+        if self.right_child:
+            return self.right_child.find_max()
+        else: 
+            return self.team, self.data
+    
+        
+class Tree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, t, d):
+        if self.root:
+            return self.root.insert(t,d)
+        else: 
+            self.root = Node(t, d)
+            return True
+
+    def find(self, d):
+        if self.root:
+            return self.root.find(d)
+        else:
+            return False
+            
+    def traverse(self):
+        if self.root:
+            return self.root.traverse()
+        else: 
+            return False
+
+
+    def find_min(self):
+        if self.root:
+            return self.root.find_min()
+        else: 
+            return False
+
+    def find_max(self):
+        if self.root:
+            return self.root.find_max()
+        else: 
+            return False
+
+
+def main():
+
+    wins = {"GS": 53, "NY": 46, "TOR":43, "LAC": 41, "DET" : 39}
+
+    bst = Tree()
+
+    for k,v in wins.items():
+        bst.insert(k,v)
+    
+    bst.traverse()
+
+    print("\nMin wins: ", bst.find_min())
+    print("Max wins: ", bst.find_max())
+
+
+if __name__ == "__main__":
+    main()
