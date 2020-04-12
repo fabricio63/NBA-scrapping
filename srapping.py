@@ -36,13 +36,14 @@ for tbody in easternTable:
     tableBody = tablerows.find_all('tbody')
     for item in tableBody:
         href = item.find_all("a", href= True)
-        # wins = item.find_all('td', attrs = {"data-stat" :"wins"})
+        wins = item.find_all('td', attrs = {"data-stat" :"wins"})
         loss = item.find_all('td', attrs = {"data-stat" :"losses"})
-        wins = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
-        # wins = item.find_all('td', attrs = {"data-stat" :"gb"})
-        # wins = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
-        # wins = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
-        # wins = item.find_all('td', attrs = {"data-stat" :"srs"})
+        win_loss_pct = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
+        gb = item.find_all('td', attrs = {"data-stat" :"gb"})
+        pts_per_g = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
+        opp_pts_per_g = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
+        srs = item.find_all('td', attrs = {"data-stat" :"srs"})
+        
         cont = 0
         for name in href:
             data.append({name.text:"wins: "+ wins[cont].text + " - " +"losses: "+ loss[cont].text})
