@@ -31,7 +31,10 @@ for tbody in easternTable:
             teams.append(name.text)
             
 
-data = []
+winsList = []
+lossList = []
+win_loss_pctList = []
+
 for tbody in easternTable:
     tableBody = tablerows.find_all('tbody')
     for item in tableBody:
@@ -46,10 +49,12 @@ for tbody in easternTable:
         
         cont = 0
         for name in href:
-            data.append({name.text:"wins: "+ wins[cont].text + " - " +"losses: "+ loss[cont].text})
+            # data.append({name.text:"wins: "+ wins[cont].text + " - " +"losses: "+ loss[cont].text})
+
+            winsList.append({name.text: int(wins[cont].text)})
+            lossList.append({name.text: int(loss[cont].text)})
+            win_loss_pctList.append({name.text: float(win_loss_pct[cont].text)})
             cont = cont +1
 
-
-
-for i in data:
+for i in winsList :
     print(i)
