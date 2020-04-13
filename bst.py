@@ -1,7 +1,8 @@
 
 # from memory_profiler import profile
+# import gc 
 
-import gc 
+from srapping import winsList
 
 class Node:
 
@@ -100,17 +101,24 @@ class Tree:
 
 def main():
 
-    wins = {"GS": 53, "NY": 46, "TOR":43, "LAC": 41, "DET" : 39}
-
     bst = Tree()
 
-    for k,v in wins.items():
-        bst.insert(k,v)
+
+    for teamDict in winsList:
+
+        for k,v in teamDict.items():
+            bst.insert(k,v)
     
     bst.traverse()
 
-    print("\nMin wins: ", bst.find_min())
-    print("Max wins: ", bst.find_max())
+    minWins = [bst.find_min()]
+    maxWins = [bst.find_max()]
+
+    print("\nMin wins: ", minWins)
+    print("Max wins: ", maxWins)
+
+    return minWins
+
 
 
 if __name__ == "__main__":

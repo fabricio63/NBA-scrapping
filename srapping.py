@@ -56,5 +56,5 @@ for tbody in easternTable:
             win_loss_pctList.append({name.text: float(win_loss_pct[cont].text)})
             cont = cont +1
 
-for i in winsList :
-    print(i)
+# for i in winsList :
+#     print(i)

@@ -1,5 +1,5 @@
 from __future__ import print_function
-from scrapper import teams
+from bst import main
 import yaml
 
 from flask import Flask, render_template, request
@@ -17,7 +17,7 @@ def home():
 
 @app.route("/dataSearch")
 def dataSearch():
-    return render_template("dataSearch.html", teams = teams)
+    return render_template("dataSearch.html", minWins = main() )
 
 if __name__ == "__main__":
 
