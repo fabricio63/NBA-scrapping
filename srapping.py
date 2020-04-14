@@ -18,7 +18,9 @@ for tablerows in easternTable:
     tr = tablerows.find_all('tr', limit=1)
     for text in tr:
         headers = text.getText().strip().split("\n")
-
+winsList = []
+lossList = []
+win_loss_pctList = []
 eteams = []
 for tbody in easternTable:
     tableBody = tablerows.find_all('tbody')
@@ -26,13 +28,15 @@ for tbody in easternTable:
         href = item.find_all("a", href= True)
         ewins = item.find_all('td', attrs = {"data-stat" :"wins"})
         eloss = item.find_all('td', attrs = {"data-stat" :"losses"})
-        ewin_loss = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
+        ewin_loss_pct = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
         egames_back = item.find_all('td', attrs = {"data-stat" :"gb"})
         epts_p_g = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
         eopp_pts_pg = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
         econt = 0
         for name in href:
-            eteams.append({name.text:"wins: "+ ewins[econt].text + " - " +"losses: "+ eloss[econt].text})
+            winsList.append({name.text: int(ewins[econt].text)})
+            lossList.append({name.text: int(eloss[econt].text)})
+            win_loss_pctList.append({name.text: float(ewin_loss_pct[econt].text)})
             econt = econt +1
 
 WesternTable = soup.findAll('table', attrs={"id":"confs_standings_W"})
@@ -49,14 +53,16 @@ for tbody in WesternTable:
         href = item.find_all("a", href= True)
         wwins = item.find_all('td', attrs = {"data-stat" :"wins"})
         wloss = item.find_all('td', attrs = {"data-stat" :"losses"})
-        wwin_loss = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
+        wwin_loss_pct = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
         wgames_back = item.find_all('td', attrs = {"data-stat" :"gb"})
         wpts_p_g = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
         wopp_pts_pg = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
         wcont = 0
         for name in href:
-            wteams.append({name.text:"wins: "+ wwins[wcont].text + " - " +"losses: "+ wloss[wcont].text})
+            winsList.append({name.text: int(wwins[wcont].text)})
+            lossList.append({name.text: int(wloss[wcont].text)})
+            win_loss_pctList.append({name.text: float(wwin_loss_pct[wcont].text)})
             wcont = wcont +1
 
-for i in wteams:
+for i in winsList:
     print(i)
