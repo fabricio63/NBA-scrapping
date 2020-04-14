@@ -36,7 +36,7 @@ for tbody in easternTable:
         href = item.find_all("a", href= True)
         wins = item.find_all('td', attrs = {"data-stat" :"wins"})
         loss = item.find_all('td', attrs = {"data-stat" :"losses"})
-        # wins = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
+        win_loss = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
         # wins = item.find_all('td', attrs = {"data-stat" :"gb"})
         # wins = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
         # wins = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
