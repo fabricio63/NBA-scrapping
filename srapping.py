@@ -19,31 +19,20 @@ for tablerows in easternTable:
     for text in tr:
         headers = text.getText().strip().split("\n")
 
-
-# # scraps eastern conference team names
-# teams = []
-# for tbody in easternTable:
-#     tableBody = tablerows.find_all('tbody')
-#     for item in tableBody:
-#         href = item.find_all("a", href= True)
-#         for name in href:
-            
-
 teams = []
 for tbody in easternTable:
     tableBody = tablerows.find_all('tbody')
     for item in tableBody:
         href = item.find_all("a", href= True)
-        wins = item.find_all('td', attrs = {"data-stat" :"wins"})
-        loss = item.find_all('td', attrs = {"data-stat" :"losses"})
-        win_loss = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
-        games_back = item.find_all('td', attrs = {"data-stat" :"gb"})
-        pts_p_g = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
-        opp_pts_pg = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
-        # wins = item.find_all('td', attrs = {"data-stat" :"srs"})
-        cont = 0
+        ewins = item.find_all('td', attrs = {"data-stat" :"wins"})
+        eloss = item.find_all('td', attrs = {"data-stat" :"losses"})
+        ewin_loss = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
+        egames_back = item.find_all('td', attrs = {"data-stat" :"gb"})
+        epts_p_g = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
+        eopp_pts_pg = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
+        econt = 0
         for name in href:
-            teams.append({name.text:"wins: "+ wins[cont].text + " - " +"losses: "+ loss[cont].text})
+            teams.append({name.text:"wins: "+ ewins[econt].text + " - " +"losses: "+ loss[cont].text})
             cont = cont +1
 
 
