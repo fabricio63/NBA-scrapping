@@ -49,12 +49,38 @@ for tbody in easternTable:
         
         cont = 0
         for name in href:
-            # data.append({name.text:"wins: "+ wins[cont].text + " - " +"losses: "+ loss[cont].text})
+            
 
             winsList.append({name.text: int(wins[cont].text)})
             lossList.append({name.text: int(loss[cont].text)})
             win_loss_pctList.append({name.text: float(win_loss_pct[cont].text)})
             cont = cont +1
+
+# Scraps Western conference headers 
+WesternTable = soup.findAll('table', attrs={"id":"confs_standings_W"})
+wheaders = []
+for tablerows in WesternTable:
+    tr = tablerows.find_all('tr', limit=1)
+    for text in tr:
+        wheaders = text.getText().strip().split("\n")
+
+
+for tbody in WesternTable:
+    tableBody = tablerows.find_all('tbody')
+    for item in tableBody:
+        href = item.find_all("a", href= True)
+        wwins = item.find_all('td', attrs = {"data-stat" :"wins"})
+        wloss = item.find_all('td', attrs = {"data-stat" :"losses"})
+        wwin_loss_pct = item.find_all('td', attrs = {"data-stat" :"win_loss_pct"})
+        wgames_back = item.find_all('td', attrs = {"data-stat" :"gb"})
+        wpts_p_g = item.find_all('td', attrs = {"data-stat" :"pts_per_g"})
+        wopp_pts_pg = item.find_all('td', attrs = {"data-stat" :"opp_pts_per_g"})
+        wcont = 0
+        for name in href:
+            winsList.append({name.text: int(wwins[wcont].text)})
+            lossList.append({name.text: int(wloss[wcont].text)})
+            win_loss_pctList.append({name.text: float(wwin_loss_pct[wcont].text)})
+            wcont = wcont +1
 
 # for i in winsList :
 #     print(i)
