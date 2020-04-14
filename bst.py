@@ -61,6 +61,8 @@ class Node:
         else: 
             return self.team, self.data
     
+    
+    
         
 class Tree:
     def __init__(self):
