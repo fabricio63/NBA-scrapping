@@ -97,6 +97,8 @@ for tbody in WesternTable:
 
 teamStandings = [winsList, lossList, win_loss_pctList, gbList, pts_per_gList, opp_pts_per_gList, srsList]
 
-
+def info():
+    return teamStandings
 # for i in winsList :
 #     print(i)
+print(info())

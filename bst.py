@@ -100,7 +100,7 @@ class Tree:
         else: 
             return False
 
-@profile
+
 def main():
 
 
@@ -189,7 +189,7 @@ def main():
     minsAndMax = [minWins, maxWins,minLoss, maxLoss,minWin_loss_pct,maxWin_loss_pct, minGb, maxGb, minPts_per_g, maxPts_per_g, minOpp_pts_per_g, maxOpp_pts_per_g, minSrs, maxSrs]
 
     bstGb.traverse()
-
+    
     return minsAndMax
 
 
