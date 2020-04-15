@@ -23,4 +23,7 @@ Con el uso de la librería de Python Beautiful Soup realizamos el *webscrapping*
 ### Memory Profiler
 
 ## Testing
+![Imagen de unit testing](https://github.com/fabricio63/NBA-scrapping/blob/master/images/unit.png)
 ### Jmeter
+
+
