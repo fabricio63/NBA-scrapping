@@ -3,7 +3,7 @@
 # import gc 
 
 from srapping import winsList
-
+from memory_profiler import profile
 class Node:
 
     def __init__(self, t, d):
@@ -100,7 +100,7 @@ class Tree:
         else: 
             return False
 
-
+@profile
 def main():
 
     bst = Tree()
@@ -124,4 +124,5 @@ def main():
 
 
 if __name__ == "__main__":
+    
     main()
