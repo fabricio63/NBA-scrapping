@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Data Search</h1>
+
+{% if year is defined %}
+<h3>NBA Team Regular Season Stats {{year}}</h3>
+{% endif %}
+
+<!-- Lowest Win-Loss Percentage {{minsAndMax[4][0][1]}} by {{minsAndMax[4][0][0]}}
+       Highest Win-Loss Percentage {{minsAndMax[5][0][1]}} by {{minsAndMax[5][0][0]}} -->
+
+<!-- [minWins, maxWins, minLoss, maxLoss, minWin_loss_pct, maxWin_loss_pct, minGb, maxGb, 
+       minPts_per_g, maxPts_per_g, minOpp_pts_per_g, maxOpp_pts_per_g, minSrs, maxSrs] -->
+
+{% if minsAndMax is defined %}
+<p class="lead"><pre>
+
+       Least wins {{minsAndMax[0][0][1]}} by {{minsAndMax[0][0][0]}}
+       Most wins {{minsAndMax[1][0][1]}} by {{minsAndMax[1][0][0]}}
+
+       Least Losses {{minsAndMax[2][0][1]}} by {{minsAndMax[2][0][0]}}
+       Most Loses {{minsAndMax[3][0][1]}} by {{minsAndMax[3][0][0]}}  
+
+       Least Games Behind {{minsAndMax[6][0][1]}} by {{minsAndMax[6][0][0]}}
+       Most Games Behind {{minsAndMax[7][0][1]}} by {{minsAndMax[7][0][0]}}
+
+       Least Points per Game {{minsAndMax[8][0][1]}} by {{minsAndMax[8][0][0]}}
+       Most Points per {{minsAndMax[9][0][1]}} by {{minsAndMax[9][0][0]}}
+
+       Least Opponent Points per Game {{minsAndMax[10][0][1]}} by {{minsAndMax[10][0][0]}}
+       Most Opponent Points per Game {{minsAndMax[11][0][1]}} by {{minsAndMax[11][0][0]}}
+
+       Lowest Simple Rating System (SRS){{minsAndMax[12][0][1]}} by {{minsAndMax[12][0][0]}}
+       Highest Simple Rating System (SRS) {{minsAndMax[13][0][1]}} by {{minsAndMax[13][0][0]}}
+
+
+</pre></p>
+{% endif %}
+
+{% endblock %}
