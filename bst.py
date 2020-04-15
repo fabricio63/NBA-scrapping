@@ -1,5 +1,5 @@
 
-# from memory_profiler import profile
+from memory_profiler import profile
 # import gc 
 
 from srapping import teamStandings
@@ -100,7 +100,7 @@ class Tree:
         else: 
             return False
 
-
+@profile
 def main():
 
 
@@ -195,4 +195,5 @@ def main():
 
 
 if __name__ == "__main__":
+    
     main()
