@@ -33,13 +33,16 @@ Por medio del framework unittest se realizarón los tests a el web scrapper y la
 #### Jmeter
 Utilizando Jmeter se realizó Test HTTP Request con 500 usuarios. Archivo:[JmeterTest.jmx](https://github.com/fabricio63/NBA-scrapping/blob/API/JmeterTest.jmx)
 
-**Results Tree**
+#### **Results Tree**
+
 ![Imagen Results Tree](https://github.com/fabricio63/NBA-scrapping/blob/API/images/jmeterResultsTree.PNG)
 
-**Graph Results**
+#### **Graph Results**
+
 ![Imagen Graph Results](https://github.com/fabricio63/NBA-scrapping/blob/API/images/jmeterGraphResults.PNG)
 
-**Summary Report**
+#### **Summary Report**
+
 ![Imagen Summary Results](https://github.com/fabricio63/NBA-scrapping/blob/API/images/jmeterSummaryReport.PNG)
 
 
