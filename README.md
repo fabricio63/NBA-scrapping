@@ -1,4 +1,4 @@
-# NBA-scrapping
+# NBA-Scrapping
 
 ## Team Members
 - [Fabricio Juarez](https://github.com/fabricio63)
