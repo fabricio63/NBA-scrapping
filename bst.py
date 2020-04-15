@@ -2,7 +2,7 @@
 # from memory_profiler import profile
 # import gc 
 
-from srapping import winsList
+from srapping import teamStandings
 
 class Node:
 
@@ -103,23 +103,94 @@ class Tree:
 
 def main():
 
-    bst = Tree()
 
-
-    for teamDict in winsList:
+    bstWins = Tree()
+    for teamDict in teamStandings[0]:
 
         for k,v in teamDict.items():
-            bst.insert(k,v)
+            bstWins.insert(k,v)
     
-    bst.traverse()
+    # bstWins.traverse()
 
-    minWins = [bst.find_min()]
-    maxWins = [bst.find_max()]
+    minWins = [bstWins.find_min()]
+    maxWins = [bstWins.find_max()]
 
-    print("\nMin wins: ", minWins)
-    print("Max wins: ", maxWins)
+    
+    bstLoss = Tree()
+    for teamDict in teamStandings[1]:
 
-    return minWins
+        for k,v in teamDict.items():
+            bstLoss.insert(k,v)
+    
+    # bstLoss.traverse()
+
+    minLoss = [bstLoss.find_min()]
+    maxLoss = [bstLoss.find_max()]
+
+
+    bstWin_loss_pct = Tree()
+    for teamDict in teamStandings[2]:
+
+        for k,v in teamDict.items():
+            bstLoss.insert(k,v)
+    
+    # bstWin_loss_pct.traverse()
+
+    minWin_loss_pct = [bstWin_loss_pct.find_min()]
+    maxWin_loss_pct = [bstWin_loss_pct.find_max()]
+
+
+    bstGb = Tree()
+    for teamDict in teamStandings[3]:
+
+        for k,v in teamDict.items():
+            bstGb.insert(k,v)
+    
+    # bstGb.traverse()
+
+    minGb = [bstGb.find_min()]
+    maxGb = [bstGb.find_max()]
+
+
+    bstPts_per_g = Tree()
+    for teamDict in teamStandings[4]:
+
+        for k,v in teamDict.items():
+            bstPts_per_g.insert(k,v)
+    
+    # bstPts_per_g.traverse()
+
+    minPts_per_g = [bstPts_per_g.find_min()]
+    maxPts_per_g = [bstPts_per_g.find_max()]
+
+    bstOpp_pts_per_g = Tree()
+    for teamDict in teamStandings[5]:
+
+        for k,v in teamDict.items():
+            bstOpp_pts_per_g.insert(k,v)
+    
+    # bstOpp_pts_per_g.traverse()
+
+    minOpp_pts_per_g  = [bstOpp_pts_per_g.find_min()]
+    maxOpp_pts_per_g = [bstOpp_pts_per_g.find_max()]
+
+
+    bstSrs = Tree()
+    for teamDict in teamStandings[6]:
+
+        for k,v in teamDict.items():
+            bstSrs.insert(k,v)
+    
+    # bstSrs.traverse()
+
+    minSrs = [bstSrs.find_min()]
+    maxSrs = [bstSrs.find_max()]
+
+    minsAndMax = [minWins, maxWins,minLoss, maxLoss,minWin_loss_pct,maxWin_loss_pct, minGb, maxGb, minPts_per_g, maxPts_per_g, minOpp_pts_per_g, maxOpp_pts_per_g, minSrs, maxSrs]
+
+    bstGb.traverse()
+
+    return minsAndMax
 
 
 

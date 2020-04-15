@@ -34,6 +34,11 @@ for tbody in easternTable:
 winsList = []
 lossList = []
 win_loss_pctList = []
+gbList = []
+pts_per_gList = []
+opp_pts_per_gList = []
+srsList = []
+
 
 for tbody in easternTable:
     tableBody = tablerows.find_all('tbody')
@@ -54,7 +59,14 @@ for tbody in easternTable:
             winsList.append({name.text: int(wins[cont].text)})
             lossList.append({name.text: int(loss[cont].text)})
             win_loss_pctList.append({name.text: float(win_loss_pct[cont].text)})
+            gbList.append({name.text: float(gb[cont].text.replace('—','0'))})
+            pts_per_gList.append({name.text: float(pts_per_g[cont].text)})
+            opp_pts_per_gList.append({name.text: float(opp_pts_per_g[cont].text)})
+            srsList.append({name.text: float(srs[cont].text)})
+
+
             cont = cont +1
+
 
 # Scraps Western conference headers 
 WesternTable = soup.findAll('table', attrs={"id":"confs_standings_W"})
@@ -80,7 +92,11 @@ for tbody in WesternTable:
             winsList.append({name.text: int(wwins[wcont].text)})
             lossList.append({name.text: int(wloss[wcont].text)})
             win_loss_pctList.append({name.text: float(wwin_loss_pct[wcont].text)})
+            
             wcont = wcont +1
+
+teamStandings = [winsList, lossList, win_loss_pctList, gbList, pts_per_gList, opp_pts_per_gList, srsList]
+
 
 # for i in winsList :
 #     print(i)
