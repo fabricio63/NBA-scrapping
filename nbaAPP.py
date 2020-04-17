@@ -10,14 +10,14 @@ app = Flask(__name__)
 developer = os.getenv("DEVELOPER", "Fabricio Juarez & Steven Wilson")
 environment =  os.getenv("ENVIRONMENT", "Development")
 
+minsAndMax, year = main() 
+
 @app.route("/")
 def home():
-    foo = "bar"
-    return render_template("home.html", mivariable = foo, developer = developer)
+    return render_template("home.html", year = year, developer = developer)
 
 @app.route("/dataSearch")
 def dataSearch():
-    minsAndMax, year = main() 
     return render_template("dataSearch.html", year = year, minsAndMax = minsAndMax )
 
 if __name__ == "__main__":
