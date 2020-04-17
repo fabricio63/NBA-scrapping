@@ -1,6 +1,5 @@
 from __future__ import print_function
-from bst import main
-from srapping import year
+from bstScrapper import main
 import yaml
 
 from flask import Flask, render_template, request
@@ -18,7 +17,8 @@ def home():
 
 @app.route("/dataSearch")
 def dataSearch():
-    return render_template("dataSearch.html", year = year, minsAndMax = main() )
+    minsAndMax, year = main() 
+    return render_template("dataSearch.html", year = year, minsAndMax = minsAndMax )
 
 if __name__ == "__main__":
 
