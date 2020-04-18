@@ -1,6 +1,8 @@
 from requests import get
 from bs4 import BeautifulSoup
+
 import pandas as pd
+from pandas import DataFrame
 
 from memory_profiler import profile
 # import gc 
@@ -123,6 +125,15 @@ def main():
     bstOpp_pts_per_g = Tree() 
     bstSrs = Tree()
 
+    teamsList = []
+    winList = []
+    lossList = []
+    win_loss_pctList = []
+    gbList = []
+    pts_per_gList = []
+    opp_pts_per_gList = []
+    srsList = []
+
     # Scraps eastern conference table
     easternTable = soup.findAll('table', attrs={"id":"confs_standings_E"})
 
@@ -142,22 +153,42 @@ def main():
             cont = 0
             for name in href:
                 teamName = name.text
+                teamsList.append(teamName)
+                
+                winsItem = float(wins[cont].text)
+                winList.append(winsItem)
+                bstWins.insert(teamName, winsItem)
 
-                headers = [wins, loss, win_loss_pct, gb, pts_per_g, opp_pts_per_g, srs]
+                lossItem = float(loss[cont].text)
+                lossList.append(lossItem)
+                bstLoss.insert(teamName, lossItem)
 
-                bstWins.insert(teamName, float(wins[cont].text))
-                bstLoss.insert(teamName, float(loss[cont].text))
-                bstWin_loss_pct.insert(teamName, float(win_loss_pct[cont].text))
-                bstGb.insert(teamName, float(gb[cont].text.replace('—','0')))
-                bstPts_per_g.insert(teamName, float(pts_per_g[cont].text))
-                bstOpp_pts_per_g.insert(teamName, float(opp_pts_per_g[cont].text))
-                bstSrs.insert(teamName, float(srs[cont].text))
+                win_loss_pctItem = float(win_loss_pct[cont].text)
+                win_loss_pctList.append(win_loss_pctItem)
+                bstWin_loss_pct.insert(teamName,win_loss_pctItem)
 
+                gbItem = float(gb[cont].text.replace('—','0'))
+                gbList.append(gbItem)
+                bstGb.insert(teamName, gbItem)
+
+                pts_per_gItem = float(pts_per_g[cont].text)
+                pts_per_gList.append(pts_per_gItem)
+                bstPts_per_g.insert(teamName, pts_per_gItem)
+
+                opp_pts_per_gItem = float(opp_pts_per_g[cont].text)
+                opp_pts_per_gList.append(opp_pts_per_gItem)
+                bstOpp_pts_per_g.insert(teamName, opp_pts_per_gItem)
+
+                srsItem = float(srs[cont].text)
+                srsList.append(srsItem)
+                bstSrs.insert(teamName,srsItem)
+
+     
                 cont +=1
+
 
     # Scraps Western conference table
     westernTable = soup.findAll('table', attrs={"id":"confs_standings_W"})
-
     for tablerows in westernTable:
         tableBody = tablerows.find_all('tbody')
         for item in tableBody:
@@ -174,14 +205,35 @@ def main():
             wcont = 0
             for name in href:
                 teamName = name.text
+                teamsList.append(teamName)
+                
+                winsItem = float(wwins[wcont].text)
+                winList.append(winsItem)
+                bstWins.insert(teamName, winsItem)
 
-                bstWins.insert(teamName, float(wwins[wcont].text))
-                bstLoss.insert(teamName, float(wloss[wcont].text))
-                bstWin_loss_pct.insert(teamName, float(wwin_loss_pct[wcont].text))
-                bstGb.insert(teamName, float(wgb[wcont].text.replace('—','0')))
-                bstPts_per_g.insert(teamName, float(wpts_per_g[wcont].text))
-                bstOpp_pts_per_g.insert(teamName, float(wopp_pts_per_g[wcont].text))
-                bstSrs.insert(teamName, float(wsrs[wcont].text))
+                lossItem = float(wloss[wcont].text)
+                lossList.append(lossItem)
+                bstLoss.insert(teamName, lossItem)
+
+                win_loss_pctItem = float(wwin_loss_pct[wcont].text)
+                win_loss_pctList.append(win_loss_pctItem)
+                bstWin_loss_pct.insert(teamName,win_loss_pctItem)
+
+                gbItem = float(wgb[wcont].text.replace('—','0'))
+                gbList.append(gbItem)
+                bstGb.insert(teamName, gbItem)
+
+                pts_per_gItem = float(wpts_per_g[wcont].text)
+                pts_per_gList.append(pts_per_gItem)
+                bstPts_per_g.insert(teamName, pts_per_gItem)
+
+                opp_pts_per_gItem = float(wopp_pts_per_g[wcont].text)
+                opp_pts_per_gList.append(opp_pts_per_gItem)
+                bstOpp_pts_per_g.insert(teamName, opp_pts_per_gItem)
+
+                srsItem = float(wsrs[wcont].text)
+                srsList.append(srsItem)
+                bstSrs.insert(teamName,srsItem)
                 
                 wcont += 1
                 
@@ -209,10 +261,14 @@ def main():
 
     minsAndMax = [minWins, maxWins,minLoss, maxLoss,minWin_loss_pct,maxWin_loss_pct, minGb, maxGb, minPts_per_g, maxPts_per_g, minOpp_pts_per_g, maxOpp_pts_per_g, minSrs, maxSrs]
 
+    data = {'Teams' : teamsList, 'Wins' : winList, 'Loss' : lossList, 'Win-Loss Percentage'  : win_loss_pctList, 'Games Behind' : gbList, 'Points Per Game':pts_per_gList,
+     'Opponent Points Per Game' :opp_pts_per_gList, 'Simple Rating System': srsList }
 
-    return minsAndMax, year
+    # ['wins', 'loss', 'win_loss_pct', 'gb', 'pts_per_g', 'opp_pts_per_g', 'srs']
+    df = DataFrame(data, columns = ['Teams','Wins','Loss', 'Win-Loss Percentage',  'Games Behind', 'Points Per Game', 'Opponent Points Per Game', 'Simple Rating System' ] )
+    
 
-
+    return minsAndMax, year, df
 
 if __name__ == "__main__":
     
