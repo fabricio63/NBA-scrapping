@@ -21,4 +21,4 @@ def calculadora (operacion,lista):
     if operacion == "range":
         return str(max(lista)-min(lista))
     else:
-        return "our calc doesnt support your request"
+        return "Our calc doesnt support your request"

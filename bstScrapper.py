@@ -1,12 +1,14 @@
+from sorting import sort
+
 from requests import get
 from bs4 import BeautifulSoup
+
 
 import pandas as pd
 from pandas import DataFrame
 
 from memory_profiler import profile
 # import gc 
-
 
 class Node:
 
@@ -151,6 +153,7 @@ def main(year):
             srs = item.find_all('td', attrs = {"data-stat" :"srs"})
         
             cont = 0
+            # Adds Eastern Conference Data to BST
             for name in href:
                 teamName = name.text
                 teamsList.append(teamName)
@@ -203,6 +206,7 @@ def main(year):
             wsrs = item.find_all('td', attrs = {"data-stat" :"srs"})
 
             wcont = 0
+            # Adds Western Conference Data to BST
             for name in href:
                 teamName = name.text
                 teamsList.append(teamName)
@@ -236,8 +240,8 @@ def main(year):
                 bstSrs.insert(teamName,srsItem)
                 
                 wcont += 1
-                
 
+    #Builds list for mins and max   
     minWins = bstWins.find_min()
     maxWins = bstWins.find_max()
     
@@ -261,6 +265,15 @@ def main(year):
 
     minsAndMax = [minWins, maxWins,minLoss, maxLoss,minWin_loss_pct,maxWin_loss_pct, minGb, maxGb, minPts_per_g, maxPts_per_g, minOpp_pts_per_g, maxOpp_pts_per_g, minSrs, maxSrs]
 
+    # SORTING
+    sortedTeamsList = sort("ALL", teamsList)
+    sortedWinList = sort("ALL", winList) 
+    sortedWinLossPCT = sort("ALL", win_loss_pctList)
+
+
+    # SEARCHING
+
+    # Builds data frame from Scrapped Data
     data = {'Teams' : teamsList, 'Wins' : winList, 'Loss' : lossList, 'Win-Loss Percentage'  : win_loss_pctList, 'Games Behind' : gbList, 'Points Per Game':pts_per_gList,
      'Opponent Points Per Game' :opp_pts_per_gList, 'Simple Rating System': srsList }
 
@@ -268,8 +281,10 @@ def main(year):
     df = DataFrame(data, columns = ['Teams','Wins','Loss', 'Win-Loss Percentage',  'Games Behind', 'Points Per Game', 'Opponent Points Per Game', 'Simple Rating System' ] )
     
 
-    return minsAndMax, year, df ,data
+    print(data["Teams"])
+    
+    return minsAndMax, year, df ,data, sortedTeamsList, sortedWinList, sortedWinLossPCT
 
 if __name__ == "__main__":
     
-    main()
+    main(2020)
