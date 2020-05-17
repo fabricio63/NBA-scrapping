@@ -105,10 +105,10 @@ class Tree:
             return False
 
 # @profile
-def main():
+def main(year):
     
     # NBA season
-    year = 2020
+    
 
     # URL page we will scrap 
     url = "https://www.basketball-reference.com/leagues/NBA_{}_standings.html".format(year)
@@ -268,7 +268,7 @@ def main():
     df = DataFrame(data, columns = ['Teams','Wins','Loss', 'Win-Loss Percentage',  'Games Behind', 'Points Per Game', 'Opponent Points Per Game', 'Simple Rating System' ] )
     
 
-    return minsAndMax, year, df
+    return minsAndMax, year, df ,data
 
 if __name__ == "__main__":
     
