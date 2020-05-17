@@ -98,7 +98,7 @@ class Tree:
         else: 
             return False
 
-    def find_max(self):
+    def find_max(self): 
         if self.root:
             return self.root.find_max()
         else: 
