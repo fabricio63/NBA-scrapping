@@ -43,10 +43,9 @@ def statistics():
     measure = request.args.get('measure')
     minsAndMax, year, df , data, sortedTeamsList, sortedWinList, sortedWinLossPCT = main(season) 
     sdata = data[tipo]
-    if season == True:
-        return render_template("dataStatistics.html", year = year, calc = calculadora(measure,sdata))
-    else: 
-        return render_template("dataStatistics.html", year = year)
+    
+    return render_template("dataStatistics.html", year = year, calc = calculadora(measure,sdata))
+ 
 
         
 
