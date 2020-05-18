@@ -10,7 +10,8 @@ Este proyecto tiene como objetivo crear una herramienta la cual nos permita util
 Con el uso de la librería de Python Beautiful Soup realizamos el *webscrapping* de los [NBA Standings](https://www.basketball-reference.com/leagues/NBA_2020_standings.html). A partir de los datos recopilados se implementó la estructura de datos de un **binary search tree** para encontrar los equipos con los punteos máximos y mínimos de cada categoría, adiconalmente se implementaron tres algoritmos de sorting: **selection sort, bubble sort, quick sort** y dos algoritmos de searching: **linear search y binary search**. Por medio del API creada con Flask un *micro web framework* par Python se desplegaron los datos correspondientes y se utilizó la librería Matplotlib para visualizar algunos datos. 
 
 ## Overview
-[**Video of API**](images\2020-04-15-05-42-14.mp4)
+[**Video of API: Entrega 1**](images\2020-04-15-05-42-14.mp4)
+[**Video of API: Entrega 2**](images\2020-05-18-06-31-43.mp4)
 - Crear un web scraper que extraiga los datos de la página.
 - Implementar una estructura de datos para ordenar y acceder los datos de forma eficiente.
 - Desarrollar un API en el que se puedan acceder los datos obtenidos.
