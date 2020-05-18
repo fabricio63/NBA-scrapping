@@ -31,14 +31,24 @@ def my_form_post():
     array = data[arrayInput]
     return render_template("dataPreview.html", year = year, minsAndMax = minsAndMax, df = df, sortedTL = sortedTeamsList , sortedWL = sortedWinList, sortedWLPCT = sortedWinLossPCT, search  = search("ALL", array , item))
 
+@app.route("/dataVisualization")
+def dataVisualization():
+    # exec(open("dataVisualization.py").read())
+    return render_template("dataVisualization.html", year = year)
+
 @app.route("/statistics")
 def statistics():
     season = request.args.get('season')
     tipo = request.args.get('tipo')
     measure = request.args.get('measure')
-    minsAndMax, year, df , data = main(season) 
+    minsAndMax, year, df , data, sortedTeamsList, sortedWinList, sortedWinLossPCT = main(season) 
     sdata = data[tipo]
-    return render_template("dataStatistics.html", year = year, calc = calculadora(measure,sdata))
+    if season == True:
+        return render_template("dataStatistics.html", year = year, calc = calculadora(measure,sdata))
+    else: 
+        return render_template("dataStatistics.html", year = year)
+
+        
 
 if __name__ == "__main__":
 

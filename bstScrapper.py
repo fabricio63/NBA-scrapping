@@ -265,6 +265,14 @@ def main(year):
 
     minsAndMax = [minWins, maxWins,minLoss, maxLoss,minWin_loss_pct,maxWin_loss_pct, minGb, maxGb, minPts_per_g, maxPts_per_g, minOpp_pts_per_g, maxOpp_pts_per_g, minSrs, maxSrs]
 
+    # Builds data frame from Scrapped Data
+    data = {'Teams' : teamsList, 'Wins' : winList, 'Loss' : lossList, 'Win-Loss Percentage'  : win_loss_pctList, 'Games Behind' : gbList, 'Points Per Game':pts_per_gList,
+     'Opponent Points Per Game' :opp_pts_per_gList, 'Simple Rating System': srsList }
+
+    # ['wins', 'loss', 'win_loss_pct', 'gb', 'pts_per_g', 'opp_pts_per_g', 'srs']
+    df = DataFrame(data, columns = ['Teams','Wins','Loss', 'Win-Loss Percentage',  'Games Behind', 'Points Per Game', 'Opponent Points Per Game', 'Simple Rating System' ] )
+    df.to_csv(r'data\dataframe_NBA.csv', index = False)
+
     # SORTING
     sortedTeamsList = sort("ALL", teamsList)
     sortedWinList = sort("ALL", winList) 
@@ -273,15 +281,7 @@ def main(year):
 
     # SEARCHING
 
-    # Builds data frame from Scrapped Data
-    data = {'Teams' : teamsList, 'Wins' : winList, 'Loss' : lossList, 'Win-Loss Percentage'  : win_loss_pctList, 'Games Behind' : gbList, 'Points Per Game':pts_per_gList,
-     'Opponent Points Per Game' :opp_pts_per_gList, 'Simple Rating System': srsList }
 
-    # ['wins', 'loss', 'win_loss_pct', 'gb', 'pts_per_g', 'opp_pts_per_g', 'srs']
-    df = DataFrame(data, columns = ['Teams','Wins','Loss', 'Win-Loss Percentage',  'Games Behind', 'Points Per Game', 'Opponent Points Per Game', 'Simple Rating System' ] )
-    
-
-    print(data["Teams"])
     
     return minsAndMax, year, df ,data, sortedTeamsList, sortedWinList, sortedWinLossPCT
 
