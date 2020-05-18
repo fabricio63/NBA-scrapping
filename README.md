@@ -69,10 +69,10 @@ Reporte para el primer conjunto de tests no dinámicos.
 #### Pytest
 
 Se utilizó el testing *framework* de Pytest para el sorting y searching. 
-El algoritmo que tuvo un desempeño superiror fue el quick sort, el cual tienen un Time complexity de (n log(n)), seguido por selection sort con un Time Complexity de O(n^2) y ultimo el bubble sort. 
+El algoritmo que tuvo un desempeño superiror fue el quick sort, el cual tienen un Time complexity de (n log(n)), seguido por selection sort con un Time Complexity de O(n^2) y ultimo el bubble sort con un Time Complexity de O(n). Archivo: [sortingTests.py](https://github.com/fabricio63/NBA-scrapping/blob/API/sortingTests.py)
 ![Imagen Pytest Searching](https://github.com/fabricio63/NBA-scrapping/blob/API/images/sortingTest.PNG)
 
-En el test realizado para el searching, el algoritmo que tuvo un desempeño superior fue el binary search, el cual tiene un Time Complexity O(log n) a comparación de un O(n) que posee el linear search. 
+En el test realizado para el searching, el algoritmo que tuvo un desempeño superior fue el binary search, el cual tiene un Time Complexity O(log n) a comparación de un O(n) que posee el linear search. Archivo: [searchingTest.py](https://github.com/fabricio63/NBA-scrapping/blob/API/searchingTest.py)
 ![Imagen Pytest Sorting](https://github.com/fabricio63/NBA-scrapping/blob/API/images/searchingtest.PNG)
 
 
