@@ -99,5 +99,6 @@ teamStandings = [winsList, lossList, win_loss_pctList, gbList, pts_per_gList, op
 
 def info():
     return teamStandings
+# for i in winsList :
+#     print(i)
 
-# print(info())

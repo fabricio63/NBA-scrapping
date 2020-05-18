@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Data Visualization</h1>
+
+{% if year is defined %}
+<h3>NBA Team Regular Season Stats {{year}}</h3>
+{% endif %}
+
+<body>
+       <img src="static\bar.png">
+       <img src="static\scatter.png">
+       <img src="static\scatter2.png">
+</body>
+
+{% endblock %}

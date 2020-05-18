@@ -1,7 +1,10 @@
 from __future__ import print_function
-from bst import main
-from srapping import year
+from bstScrapper import main
 import yaml
+from calc import calculadora
+from searching import search
+from sorting import sort
+
 
 from flask import Flask, render_template, request
 import os, optparse
@@ -11,14 +14,40 @@ app = Flask(__name__)
 developer = os.getenv("DEVELOPER", "Fabricio Juarez & Steven Wilson")
 environment =  os.getenv("ENVIRONMENT", "Development")
 
+minsAndMax, year, df ,data, sortedTeamsList, sortedWinList, sortedWinLossPCT = main("2020") 
+
 @app.route("/")
 def home():
-    foo = "bar"
-    return render_template("home.html", mivariable = foo, developer = developer)
+    return render_template("home.html", year = year, developer = developer)
 
-@app.route("/dataSearch")
-def dataSearch():
-    return render_template("dataSearch.html", year = year, minsAndMax = main() )
+@app.route("/dataPreview")
+def dataPreview():
+    return render_template("dataPreview.html", year = year, minsAndMax = minsAndMax, sortedTL = sortedTeamsList , sortedWL = sortedWinList, sortedWLPCT = sortedWinLossPCT)
+
+@app.route('/dataPreview', methods=['POST'])
+def my_form_post():
+    arrayInput = request.form['array']
+    item = request.form['item']
+    array = data[arrayInput]
+    return render_template("dataPreview.html", year = year, minsAndMax = minsAndMax, df = df, sortedTL = sortedTeamsList , sortedWL = sortedWinList, sortedWLPCT = sortedWinLossPCT, search  = search("ALL", array , item))
+
+@app.route("/dataVisualization")
+def dataVisualization():
+    # exec(open("dataVisualization.py").read())
+    return render_template("dataVisualization.html", year = year)
+
+@app.route("/statistics")
+def statisticsPOST():
+    try:
+        season = request.args.get('season')
+        tipo = request.args.get('tipo')
+        measure = request.args.get('measure')
+        minsAndMax, year, df , data, sortedTeamsList, sortedWinList, sortedWinLossPCT = main(season) 
+        sdata = data[tipo]
+        return render_template("dataStatistics.html", year = year, tipo = tipo, measure = measure, calc = calculadora(measure,sdata))
+    except:
+        return render_template("dataStatistics.html", year = year)
+        
 
 if __name__ == "__main__":
 

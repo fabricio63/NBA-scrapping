@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Data Statistics</h1>
+
+{% if year is defined %}
+<h3>NBA Team Regular Season Stats {{year}}</h3>
+{% endif %}
+
+
+{% if calc is defined %}
+<p class="lead"><pre>
+       {{tipo}}
+       {{measure}}: {{calc}}
+ 
+
+</pre></p>
+
+{% endif %}
+{% endblock %}
