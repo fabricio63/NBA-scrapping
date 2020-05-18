@@ -37,17 +37,16 @@ def dataVisualization():
     return render_template("dataVisualization.html", year = year)
 
 @app.route("/statistics")
-def statistics():
-    season = request.args.get('season')
-    tipo = request.args.get('tipo')
-    measure = request.args.get('measure')
-    minsAndMax, year, df , data, sortedTeamsList, sortedWinList, sortedWinLossPCT = main(season) 
-    sdata = data[tipo]
-    if season == True:
-        return render_template("dataStatistics.html", year = year, calc = calculadora(measure,sdata))
-    else: 
+def statisticsPOST():
+    try:
+        season = request.args.get('season')
+        tipo = request.args.get('tipo')
+        measure = request.args.get('measure')
+        minsAndMax, year, df , data, sortedTeamsList, sortedWinList, sortedWinLossPCT = main(season) 
+        sdata = data[tipo]
+        return render_template("dataStatistics.html", year = year, tipo = tipo, measure = measure, calc = calculadora(measure,sdata))
+    except:
         return render_template("dataStatistics.html", year = year)
-
         
 
 if __name__ == "__main__":

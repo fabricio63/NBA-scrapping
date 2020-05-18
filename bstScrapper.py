@@ -279,9 +279,6 @@ def main(year):
     sortedWinLossPCT = sort("ALL", win_loss_pctList)
 
 
-    # SEARCHING
-
-
     
     return minsAndMax, year, df ,data, sortedTeamsList, sortedWinList, sortedWinLossPCT
 

@@ -1,7 +1,5 @@
 from typing import Tuple
 
-l = [1.0,2.0,6.0,8.8,19.0,21.0,23.0]
-
 def linear_search(sorted_list: list, value:int) -> Tuple[bool, int]:
     for i in range(0, len(sorted_list)):
         if sorted_list[i] == value:
@@ -80,9 +78,3 @@ def search(searchType, array, item):
             except: 
                 return "Invalid Input"
 
-
-# print(search ("ALL", l, "6.8"))
-# # print(binary_search(l, 8))
-# # print("POS: ", binary_search(l, 8) ,"NUM: ", l[binary_search(l, 8)])
-# # print(linear_search(l, 23,))
-# print(jump_search(l, 8, 2))
